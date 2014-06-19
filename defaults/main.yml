@@ -5,8 +5,10 @@ ltb_keyphrase: "{{ lookup('password', ltb_run_dir + '/private/credentials/ltb-ke
 ltb_download_url: http://tools.ltb-project.org/attachments/download/497/ltb-project-self-service-password-0.8.tar.gz
 
 ldap_uri: ldap://127.0.0.1/
-ldap_base_dn: dc=localdomain
-ldap_admin_password: password
+
+ltb_bind_dn: cn=admin,{{ ldap_base_dn }}
+ltb_bind_password: "{{ ldap_admin_password }}"
+ltb_base_dn: ou=users,{{ ldap_base_dn }}
 
 ltb_hostname: localhost
 ltb_http_port: 80
@@ -22,7 +24,7 @@ ltb_admin_email: root@localhost
 
 ltb_use_questions: true
 ltb_questions:
-  - { name: birthday, phrase: What is the date of your birth? }
+  - { tag: birthday, phrase: "What is the date of your birth?" }
 
 ltb_use_tokens: true
 

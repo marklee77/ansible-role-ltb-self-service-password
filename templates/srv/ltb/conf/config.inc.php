@@ -24,9 +24,9 @@
 #==============================================================================
 # LDAP
 $ldap_url = "${{ ldap_uri }}";
-$ldap_binddn = "${{ ldap_bind_dn }}";
-$ldap_bindpw = "${{ ldap_bind_password }}";
-$ldap_base = "${{ ldap_base_dn }}";
+$ldap_binddn = "${{ ltb_bind_dn }}";
+$ldap_bindpw = "${{ ltb_bind_password }}";
+$ldap_base = "${{ ltb_base_dn }}";
 $ldap_login_attribute = "uid";
 $ldap_fullname_attribute = "cn";
 $ldap_filter = "(&(objectClass=account)($ldap_login_attribute={login}))";

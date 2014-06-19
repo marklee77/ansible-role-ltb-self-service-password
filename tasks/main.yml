@@ -12,6 +12,11 @@
     - php5-mcrypt
     - ssl-cert
 
+- name: ensure that mcrypt module is enabled
+  command: php5enmod mcrypt creates=/etc/php5/fpm/conf.d/20-mcrypt.ini
+  notify:
+    - restart php5-fpm
+
 - name: ensure that ltb group exists
   group:
     name: ltb
