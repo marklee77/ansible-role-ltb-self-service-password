@@ -23,13 +23,13 @@
 # Configuration
 #==============================================================================
 # LDAP
-$ldap_url = "ldap://localhost";
-$ldap_binddn = "cn=manager,dc=example,dc=com";
-$ldap_bindpw = "secret";
-$ldap_base = "dc=example,dc=com";
+$ldap_url = "${{ ldap_uri }}";
+$ldap_binddn = "${{ ldap_bind_dn }}";
+$ldap_bindpw = "${{ ldap_bind_password }}";
+$ldap_base = "${{ ldap_base_dn }}";
 $ldap_login_attribute = "uid";
 $ldap_fullname_attribute = "cn";
-$ldap_filter = "(&(objectClass=person)($ldap_login_attribute={login}))";
+$ldap_filter = "(&(objectClass=account)($ldap_login_attribute={login}))";
 
 # Active Directory mode
 # true: use unicodePwd as password field
@@ -57,12 +57,12 @@ $shadow_options['update_shadowLastChange'] = false;
 # CRYPT
 # clear (the default)
 # This option is not used with ad_mode = true
-$hash = "clear";
+$hash = "SSHA";
 
 # Local password policy
 # This is applied before directory password policy
 # Minimal length
-$pwd_min_length = 0;
+$pwd_min_length = 8;
 # Maximal length
 $pwd_max_length = 0;
 # Minimal lower characters
@@ -85,7 +85,7 @@ $pwd_complexity = 0;
 # always
 # never
 # onerror
-$pwd_show_policy = "never";
+$pwd_show_policy = "always";
 # Position of password policy constraints message:
 # above - the form
 # below - the form
@@ -101,7 +101,7 @@ $who_change_password = "user";
 # Use questions/answers?
 # true (default)
 # false
-$use_questions = true;
+$use_questions = {{ ltb_use_questions }};
 
 # Answer attribute should be hidden to users!
 $answer_objectClass = "extensibleObject";
@@ -114,7 +114,7 @@ $answer_attribute = "info";
 # Use tokens?
 # true (default)
 # false
-$use_tokens = true;
+$use_tokens = {{ ltb_use_tokens }};
 # Crypt tokens?
 # true (default)
 # false
@@ -126,21 +126,21 @@ $token_lifetime = "3600";
 # LDAP mail attribute
 $mail_attribute = "mail";
 # Who the email should come from
-$mail_from = "admin@example.com";
+$mail_from = "{{ ltb_admin_email }}";
 # Notify users anytime their password is changed
 $notify_on_change = false;
 
 ## SMS
 # Use sms
-$use_sms = true;
+$use_sms = {{ ltb_use_sms }};
 # GSM number attribute
 $sms_attribute = "mobile";
 # Send SMS mail to address
-$smsmailto = "{sms_attribute}@service.provider.com";
+$smsmailto = "{{ ltb_sms_mailto }}";
 # Subject when sending email to SMTP to SMS provider
-$smsmail_subject = "Provider code";
+$smsmail_subject = "{{ ltb_sms_subject }}";
 # Message
-$sms_message = "{smsresetmessage} {smstoken}";
+$sms_message = "{{ ltb_sms_message }}";
 
 # SMS token length
 $sms_token_length = 6;
@@ -158,7 +158,7 @@ $logo = "style/ltb-logo.png";
 $debug = false;
 
 # Encryption, decryption keyphrase
-$keyphrase = "secret";
+$keyphrase = "{{ ltb_keyphrase }}";
 
 # Where to log password resets - Make sure apache has write permission
 # By default, they are logged in Apache log
@@ -172,14 +172,14 @@ $login_forbidden_chars = "*()&|";
 ## CAPTCHA
 # Use Google reCAPTCHA (http://www.google.com/recaptcha)
 # Go on the site to get public and private key
-$use_recaptcha = false;
-$recaptcha_publickey = "";
-$recaptcha_privatekey = "";
+$use_recaptcha = {{ ltb_use_recaptcha }};
+$recaptcha_publickey = "{{ ltb_recaptcha_public_key }}";
+$recaptcha_privatekey = "{{ ltb_recaptcha_private_key }}";
 # Customize theme (see http://code.google.com/intl/de-DE/apis/recaptcha/docs/customization.html)
 # Examples: red, white, blackglass, clean
-$recaptcha_theme = "white";
+$recaptcha_theme = "{{ ltb_recaptcha_theme }}";
 # Force HTTPS for recaptcha HTML code
-$recaptcha_ssl = false;
+$recaptcha_ssl = {{ ltb_recaptcha_ssl }};
 
 ## Default action
 # change

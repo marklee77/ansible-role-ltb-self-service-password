@@ -51,6 +51,22 @@
     group: ltb
     recurse: yes
 
+- name: update /srv/ltb/conf/config.inc.php from template
+  template:
+    src: srv/ltb/conf/config.inc.php
+    dest: /srv/ltb/conf/config.inc.php
+    owner: ltb
+    group: ltb
+    mode: 0600
+
+- name: update /srv/ltb/lang/en.inc.php from template
+  template:
+    src: srv/ltb/lang/en.inc.php
+    dest: /srv/ltb/lang/en.inc.php
+    owner: ltb
+    group: ltb
+    mode: 0600
+
 - name: update /etc/php5/fpm/pool.d/ltb.conf from template
   template:
     src: etc/php5/fpm/pool.d/ltb.conf

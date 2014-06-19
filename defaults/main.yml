@@ -1,7 +1,12 @@
 ---
 ltb_run_dir: "{{ lookup('env', 'PWD') }}"
+ltb_keyphrase: "{{ lookup('password', ltb_run_dir + '/private/credentials/ltb-keyphrase') }}"
 
 ltb_download_url: http://tools.ltb-project.org/attachments/download/497/ltb-project-self-service-password-0.8.tar.gz
+
+ldap_uri: ldap://127.0.0.1/
+ldap_base_dn: dc=localdomain
+ldap_admin_password: password
 
 ltb_hostname: localhost
 ltb_http_port: 80
@@ -13,6 +18,21 @@ ltb_require_ssl: true
 ltb_ssl_cert_file: /etc/ssl/certs/ssl-cert-snakeoil.pem
 ltb_ssl_key_file: /etc/ssl/private/ssl-cert-snakeoil.key
 
-ldap_uri: ldap://127.0.0.1/
-ldap_base_dn: dc=localdomain
-ldap_admin_password: password
+ltb_admin_email: root@localhost
+
+ltb_use_questions: true
+ltb_questions:
+  - { name: birthday, phrase: What is the date of your birth? }
+
+ltb_use_tokens: true
+
+ltb_use_sms: false
+ltb_sms_mailto: "{sms_attribute}@service.provider.com"
+ltb_sms_subject: Provider code
+ltb_sms_message: "{smsresetmessage} {smstoken}"
+
+ltb_use_recaptcha: false
+ltb_recaptcha_public_key: ''
+ltb_recaptcha_private_key: ''
+ltb_recaptcha_theme: white
+ltb_recaptcha_ssl: true
