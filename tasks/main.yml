@@ -9,6 +9,7 @@
     - nginx
     - php5-fpm
     - php5-ldap
+    - php5-mcrypt
     - ssl-cert
 
 - name: ensure that ltb group exists
@@ -39,7 +40,7 @@
     dest: /var/cache/ansible/ltb.tar.gz
 
 - name: unarchive ltb to /srv/ltb
-  command: tar --strip-components 1 -xvzf /var/cache/ansible/ltb.tar.bz2
+  command: tar --strip-components 1 -xvzf /var/cache/ansible/ltb.tar.gz
            chdir=/srv/ltb
            creates=/srv/ltb/index.php
 
