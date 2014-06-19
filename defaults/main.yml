@@ -1,15 +1,17 @@
 ---
-pwm_run_dir: "{{ lookup('env', 'PWD') }}"
+ltb_run_dir: "{{ lookup('env', 'PWD') }}"
 
-pwm_hostname: localhost
-pwm_http_port: 80
-pwm_https_port: 443
-pwm_https_enable: true
+ltb_download_url: http://tools.ltb-project.org/attachments/download/497/ltb-project-self-service-password-0.8.tar.gz
 
-pwm_require_ssl: true
+ltb_hostname: localhost
+ltb_http_port: 80
+ltb_https_port: 443
+ltb_https_enable: true
 
-pwm_ssl_cert_file: /etc/ssl/certs/ssl-cert-snakeoil.pem
-pwm_ssl_key_file: /etc/ssl/private/ssl-cert-snakeoil.key
+ltb_require_ssl: true
+
+ltb_ssl_cert_file: /etc/ssl/certs/ssl-cert-snakeoil.pem
+ltb_ssl_key_file: /etc/ssl/private/ssl-cert-snakeoil.key
 
 ldap_uri: ldap://127.0.0.1/
 ldap_base_dn: dc=localdomain

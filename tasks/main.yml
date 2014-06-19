@@ -6,24 +6,24 @@
     update_cache: yes 
     cache_valid_time: 600
   with_items:
-    - ant
     - nginx
-    - openjdk-7-jdk
+    - php5-fpm
+    - php5-ldap
     - ssl-cert
-    - subversion
 
-# FIXME: if ssl-cert turns out problematic this can probably be done in a
-# self-contained shell script...
-#- name: ensure that ssl-cert is configured properly to generate self-signed certificate if required
-#  debconf:
-#    name: ssl-cert
-#    question: make-ssl-cert/hostname 
-#    vtype: string
-#    value: "{{ owncloud_hostname }}"
+- name: ensure that ltb group exists
+  group:
+    name: ltb
+    state: present
 
-#- name: create self-signed key/certificate pair if required
-#  shell: DEBIAN_FRONTEND=noninteractive make-ssl-cert /usr/share/ssl-cert/ssleay.cnf {{ owncloud_ssl_cert_file }}
-#         creates={{ owncloud_ssl_cert_file }}
+- name: ensure that ltb user exits
+  user:
+    name: ltb
+    group: ltb
+    home: /srv/ltb
+    createhome: yes
+    shell: /bin/bash
+    state: present
 
 - name: ensure /var/cache/ansible directory exists
   file:
@@ -33,43 +33,51 @@
     mode: 0755
     state: directory
 
-- name: checkout pwm from svn repository
-  subversion:
-    repo: http://pwm.googlecode.com/svn/tags/v1.7.1/pwm
-    dest: /var/cache/ansible/pwm
+- name: download the ltb self service password install package
+  get_url:
+    url: "{{ ltb_download_url }}"
+    dest: /var/cache/ansible/ltb.tar.bz2
 
-- name: build pwm.war
-  command: ant makeWAR 
-           chdir=/var/cache/ansible/pwm/servlet 
-           creates=/var/cache/ansible/pwm/servlet/build/pwm.war
+- name: unarchive ltb to /srv/ltb
+  command: tar --strip-components 1 -xvjf /var/cache/ansible/ltb.tar.bz2
+           chdir=/srv/ltb
+           creates=/srv/ltb/index.php
+  notify:
+    - update /srv/ltb/config/autoconfig.php from template
+    - update /srv/ltb/config/config.php from template
+    - initialize database
 
-- name: link /var/cache/ansible/pwm/servlet/build/pwm.war to ..
+- name: ensure files under /srv/ltb are owned by ltb user
   file:
-    src: /var/cache/ansible/pwm/servlet/build/pwm.war 
-    dest: /var/lib/tomcat6/webapps/pwm.war
-    state: link
+    path: /srv/ltb
+    owner: ltb
+    group: ltb
+    recurse: yes
 
-#- name: ensure /srv/owncloud is owned by owncloud user
-#  file:
-#    path: /srv/owncloud
-#    owner: owncloud
-#    group: owncloud
-#    recurse: yes
-
-- name: update /etc/nginx/sites-available/pwm from template
+- name: update /etc/php5/fpm/pool.d/ltb.conf from template
   template:
-    src: etc/nginx/sites-available/pwm
-    dest: /etc/nginx/sites-available/pwm
+    src: etc/php5/fpm/pool.d/ltb.conf
+    dest: /etc/php5/fpm/pool.d/ltb.conf 
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart php5-fpm
+
+- name: update /etc/nginx/sites-available/ltb from template
+  template:
+    src: etc/nginx/sites-available/ltb
+    dest: /etc/nginx/sites-available/ltb
     owner: root
     group: root
     mode: 0644
   notify:
     - restart nginx
 
-- name: ensure /etc/nginx/sites-enabled/pwm exists and links to ../sites-available/pwm
+- name: ensure /etc/nginx/sites-enabled/ltb exists and links to ../sites-available/ltb
   file:
-    path: /etc/nginx/sites-enabled/pwm
-    src: ../sites-available/pwm
+    path: /etc/nginx/sites-enabled/ltb
+    src: ../sites-available/ltb
     force: yes
     state: link
   notify:
@@ -78,19 +86,19 @@
 - name: ensure that there is not a hostname collision with the nginx default host
   lineinfile:
     dest: /etc/nginx/sites-available/default
-    regexp: '^(\s+)(server_name {{ pwm_hostname }};.*)$'
+    regexp: '^(\s+)(server_name {{ ltb_hostname }};.*)$'
     backrefs: yes
     line: '\1#\2'
     state: present
   notify:
     - restart nginx
 
-- name: ensure pwm services are started and enabled
+- name: ensure ltb services are started and enabled
   service:
     name: "{{ item }}"
     state: started
     enabled: yes
   with_items:
-    - tomcat6
     - nginx
+    - php5-fpm
 
