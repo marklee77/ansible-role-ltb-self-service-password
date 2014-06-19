@@ -1,13 +1,13 @@
 ---
 ltb_run_dir: "{{ lookup('env', 'PWD') }}"
 ltb_keyphrase: "{{ lookup('password', ltb_run_dir + '/private/credentials/ltb-keyphrase') }}"
+ltb_bind_password: "{{ lookup('password', ltb_run_dir + '/private/credentials/ltb-bind-password') }}"
 
 ltb_download_url: http://tools.ltb-project.org/attachments/download/497/ltb-project-self-service-password-0.8.tar.gz
 
 ldap_uri: ldap://127.0.0.1/
 
-ltb_bind_dn: cn=admin,{{ ldap_base_dn }}
-ltb_bind_password: "{{ ldap_admin_password }}"
+ltb_bind_dn: uid=ltb,ou=services,{{ ldap_base_dn }}
 ltb_base_dn: ou=users,{{ ldap_base_dn }}
 
 ltb_hostname: localhost

@@ -29,7 +29,7 @@ $ldap_bindpw = "{{ ltb_bind_password }}";
 $ldap_base = "{{ ltb_base_dn }}";
 $ldap_login_attribute = "uid";
 $ldap_fullname_attribute = "cn";
-$ldap_filter = "(&(objectClass=account)($ldap_login_attribute={login}))";
+$ldap_filter = "(&(objectClass=person)($ldap_login_attribute={login}))";
 
 # Active Directory mode
 # true: use unicodePwd as password field
