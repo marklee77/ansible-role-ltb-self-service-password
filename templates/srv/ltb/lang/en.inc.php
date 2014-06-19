@@ -57,7 +57,7 @@ $messages['policyminspecial'] = "Minimum number of special characters:";
 $messages['forbiddenchars'] = "You password contains forbidden characters";
 $messages['policyforbiddenchars'] = "Forbidden characters:";
 $messages['policynoreuse'] = "Your new password may not be the same as your old password";
-{%- for question in ltb_questions %}
+{% for question in ltb_questions -%}
 $messages['questions']['{{ question.tag }}'] = "{{ question.phrase }}";
 {% endfor -%}
 $messages['password'] = "Password";
