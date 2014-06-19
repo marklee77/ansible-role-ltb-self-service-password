@@ -2,4 +2,4 @@
   sudo: True
   roles:
     - marklee77.slapd-auth
-    - marklee77.pwm
+    - marklee77.ltb

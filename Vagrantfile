@@ -21,9 +21,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "site.yml"
     ansible.extra_vars = {
-      pwm_http_port: 8080,
-      pwm_require_ssl: false,
-      tomcat6_catalina_port: 8080,
+      ltb_http_port: 8080,
+      ltb_require_ssl: false,
       ldap_require_ssl: false,
     }
   end
