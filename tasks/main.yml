@@ -36,16 +36,12 @@
 - name: download the ltb self service password install package
   get_url:
     url: "{{ ltb_download_url }}"
-    dest: /var/cache/ansible/ltb.tar.bz2
+    dest: /var/cache/ansible/ltb.tar.gz
 
 - name: unarchive ltb to /srv/ltb
-  command: tar --strip-components 1 -xvjf /var/cache/ansible/ltb.tar.bz2
+  command: tar --strip-components 1 -xvzf /var/cache/ansible/ltb.tar.bz2
            chdir=/srv/ltb
            creates=/srv/ltb/index.php
-  notify:
-    - update /srv/ltb/config/autoconfig.php from template
-    - update /srv/ltb/config/config.php from template
-    - initialize database
 
 - name: ensure files under /srv/ltb are owned by ltb user
   file:
