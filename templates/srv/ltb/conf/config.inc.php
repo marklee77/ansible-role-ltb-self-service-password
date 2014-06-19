@@ -62,7 +62,7 @@ $hash = "SSHA";
 # Local password policy
 # This is applied before directory password policy
 # Minimal length
-$pwd_min_length = 8;
+$pwd_min_length = 10;
 # Maximal length
 $pwd_max_length = 0;
 # Minimal lower characters
@@ -106,9 +106,6 @@ $use_questions = {{ ltb_use_questions }};
 # Answer attribute should be hidden to users!
 $answer_objectClass = "extensibleObject";
 $answer_attribute = "info";
-
-# Extra questions (built-in questions are in lang/$lang.inc.php)
-#$messages['questions']['ice'] = "What is your favorite ice cream flavor?";
 
 ## Token
 # Use tokens?
