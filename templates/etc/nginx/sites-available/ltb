@@ -26,8 +26,6 @@ server {
   root /srv/ltb/;
 
   index index.php;
-  error_page 403 /core/templates/403.php;
-  error_page 404 /core/templates/404.php;
 
   location ~ ^/(data|config|\.ht|db_structure\.xml|README) {
     deny all;
@@ -38,8 +36,6 @@ server {
   }
 
   location ~ ^(.+?\.php)(/.*)?$ {
-    try_files $1 = 404;
-
     include fastcgi_params;
     fastcgi_param SCRIPT_FILENAME $document_root$1;
     fastcgi_param PATH_INFO $2;
