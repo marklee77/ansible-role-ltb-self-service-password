@@ -66,11 +66,11 @@ $pwd_min_length = 10;
 # Maximal length
 $pwd_max_length = 0;
 # Minimal lower characters
-$pwd_min_lower = 0;
+$pwd_min_lower = 2;
 # Minimal upper characters
-$pwd_min_upper = 0;
+$pwd_min_upper = 2;
 # Minimal digit characters
-$pwd_min_digit = 0;
+$pwd_min_digit = 2;
 # Minimal special characters
 $pwd_min_special = 0;
 # Definition of special characters
@@ -140,7 +140,7 @@ $smsmail_subject = "{{ ltb_sms_subject }}";
 $sms_message = "{{ ltb_sms_message }}";
 
 # SMS token length
-$sms_token_length = 6;
+$sms_token_length = 8;
 
 # Display help messages
 $show_help = true;

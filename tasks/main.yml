@@ -31,27 +31,27 @@
     shell: /bin/bash
     state: present
 
-- name: ensure that services ou exists in ldap
-  ldap:
-    bind_dn: cn=admin,{{ ldap_base_dn }}
-    bind_password: "{{ ldap_admin_password }}"
-    entry_dn: ou=services,{{ ldap_base_dn }}
-    attributes:
-      - objectClass: organizationalUnit
-      - ou: services
-    state: present
+#- name: ensure that services ou exists in ldap
+#  ldap:
+#    bind_dn: cn=admin,{{ ldap_base_dn }}
+#    bind_password: "{{ ldap_admin_password }}"
+#    entry_dn: ou=services,{{ ldap_base_dn }}
+#    attributes:
+#      - objectClass: organizationalUnit
+#      - ou: services
+#    state: present
 
-- name: ensure that ltb user exists in ldap
-  ldap:
-    bind_dn: cn=admin,{{ ldap_base_dn }}
-    bind_password: "{{ ldap_admin_password }}"
-    entry_dn: uid=ltb,ou=services,{{ ldap_base_dn }}
-    attributes:
-      - objectClass: account
-      - objectClass: simpleSecurityObject
-      - uid: ltb
-      - userPassword: "{{ ltb_bind_password }}"
-    state: present
+#- name: ensure that ltb user exists in ldap
+#  ldap:
+#    bind_dn: cn=admin,{{ ldap_base_dn }}
+#    bind_password: "{{ ldap_admin_password }}"
+#    entry_dn: uid=ltb,ou=services,{{ ldap_base_dn }}
+#    attributes:
+#      - objectClass: account
+#      - objectClass: simpleSecurityObject
+#      - uid: ltb
+#      - userPassword: "{{ ltb_bind_password }}"
+#    state: present
 
 - name: ensure /var/cache/ansible directory exists
   file:
