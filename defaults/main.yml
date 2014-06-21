@@ -23,7 +23,7 @@ ltb_ssl_key_file: /etc/ssl/private/ssl-cert-snakeoil.key
 
 ltb_admin_email: root@localhost
 
-ltb_use_questions: true
+ltb_use_questions: false
 ltb_questions:
   - { tag: birthday, phrase: "What is the date of your birth?" }
 
