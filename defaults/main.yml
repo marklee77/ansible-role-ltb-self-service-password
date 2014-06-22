@@ -6,11 +6,6 @@ ltb_download_url: http://tools.ltb-project.org/attachments/download/497/ltb-proj
 
 ldap_uri: ldap://127.0.0.1/
 
-ltb_bind_dn: cn=admin,{{ ldap_base_dn }}
-ltb_bind_password: "{{ ldap_admin_password }}"
-
-ltb_base_dn: ou=users,{{ ldap_base_dn }}
-
 ltb_hostname: localhost
 ltb_http_port: 80
 ltb_https_port: 443
