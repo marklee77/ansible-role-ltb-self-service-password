@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Mark Stillwell
-  description: LDAP Tool Box Serlf Service Password web service
+  description: LDAP Tool Box Self Service Password web service
   license: GPLv2
   min_ansible_version: 1.5
   platforms:
