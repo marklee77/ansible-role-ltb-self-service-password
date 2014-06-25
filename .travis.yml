@@ -12,6 +12,10 @@ install:
     - sudo pip install --upgrade ansible
     - ansible-playbook --version
 
+    # Get Roles
+    - ansible-playbook -i travis/inventory getroles.yml
+
+
 script:
 
     # Check the role/playbook's syntax.
