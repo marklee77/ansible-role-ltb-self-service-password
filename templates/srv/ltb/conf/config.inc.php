@@ -23,7 +23,7 @@
 # Configuration
 #==============================================================================
 # LDAP
-$ldap_url = "{{ ldap_auth_url }}";
+$ldap_url = "ldapi:///"; # does not support ldap:// with tls...
 $ldap_binddn = "cn=admin,{{ ldap_auth_base_dn }}";
 $ldap_bindpw = "{{ ldap_auth_admin_password }}";
 $ldap_base = "{{ ldap_auth_base_dn }}";
