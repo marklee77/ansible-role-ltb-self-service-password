@@ -23,13 +23,13 @@
 # Configuration
 #==============================================================================
 # LDAP
-$ldap_url = "{{ ldap_uri }}";
-$ldap_binddn = "cn=admin,{{ ldap_base_dn }}";
-$ldap_bindpw = "{{ ldap_admin_password }}";
-$ldap_base = "{{ ldap_base_dn }}";
-$ldap_login_attribute = "uid";
-$ldap_fullname_attribute = "cn";
-$ldap_filter = "(&(objectClass=person)($ldap_login_attribute={login}))";
+$ldap_url = "{{ ldap_auth_url }}";
+$ldap_binddn = "cn=admin,{{ ldap_auth_base_dn }}";
+$ldap_bindpw = "{{ ldap_auth_admin_password }}";
+$ldap_base = "{{ ldap_auth_base_dn }}";
+$ldap_login_attribute = "{{ ldap_auth_uid_attribute }}";
+$ldap_fullname_attribute = "{{ ldap_auth_displayname_attribute }}";
+$ldap_filter = "(&({{ ldap_auth_user_filter }})($ldap_login_attribute={login}))";
 
 # Active Directory mode
 # true: use unicodePwd as password field

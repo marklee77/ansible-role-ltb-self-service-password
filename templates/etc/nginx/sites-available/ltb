@@ -8,6 +8,7 @@ server {
   listen {{ ltb_http_port }};
   server_name {{ ltb_hostname }};
 
+  {% if ltb_enable_ssl -%}
   listen {{ ltb_https_port }} ssl;
   ssl_certificate {{ ltb_ssl_cert_file }};
   ssl_certificate_key {{ ltb_ssl_key_file }};
@@ -21,6 +22,7 @@ server {
     {%- if ltb_https_port != 443 %}:{{ ltb_https_port }}{% endif -%}
         $request_uri;
   }
+  {%- endif %}
   {%- endif %}
 
   root /srv/ltb/;

@@ -4,17 +4,13 @@ ltb_keyphrase: "{{ lookup('password', ltb_run_dir + '/private/credentials/ltb-ke
 
 ltb_download_url: http://tools.ltb-project.org/attachments/download/497/ltb-project-self-service-password-0.8.tar.gz
 
-ldap_uri: ldap://127.0.0.1/
-
 ltb_hostname: localhost
 ltb_http_port: 80
 ltb_https_port: 443
-ltb_https_enable: true
-
+ltb_enable_ssl: true
 ltb_require_ssl: true
-
-ltb_ssl_cert_file: /etc/ssl/certs/ssl-cert-snakeoil.pem
-ltb_ssl_key_file: /etc/ssl/private/ssl-cert-snakeoil.key
+ltb_ssl_cert_file: ""
+ltb_ssl_key_file: ""
 
 ltb_admin_email: root@localhost
 

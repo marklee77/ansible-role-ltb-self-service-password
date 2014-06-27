@@ -1,5 +1,5 @@
-Role Name
-========
+marklee77.ltb
+=============
 
 The purpose of this role is to install the ldap toolbox self-service password
 administration web application o a web server and enable access with nginx. 
@@ -17,8 +17,7 @@ Role Variables
 - ltb_hostname: localhost
 - ltb_http_port: 80
 - ltb_https_port: 443
-- ltb_https_enable: true
-
+- ltb_enable_ssl: true
 - ltb_require_ssl: true
 
 - ltb_ssl_cert_file: /etc/ssl/certs/ssl-cert-snakeoil.pem
@@ -50,9 +49,6 @@ information in ldap.
 Example Playbook
 -------------------------
 
-Including an example of how to use your role (for instance, with variables 
-passed in as parameters) is always nice for users too:
-
     - hosts: all
       sudo: True
       roles:
@@ -73,5 +69,5 @@ GPLv2
 Author Information
 ------------------
 
-http://marklee77.github.io
+http://stillwell.me
 
